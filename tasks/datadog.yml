@@ -1,0 +1,32 @@
+---
+- name: Datadog
+  block:
+  - name: Add helm repository
+    kubernetes.core.helm_repository:
+      name: datadog
+      repo_url: https://helm.datadoghq.com
+
+  - name: Add API key
+    kubernetes.core.secret:
+      name: datadog-secret
+      namespace: monitoring
+      data:
+        api-key: {{ dd_api_key }}
+
+  - name: Install datadog/datadog-operator
+    kubernetes.core.helm:
+      name: datadog-operator
+      chart_ref: datadog/datadog-operator
+      release_namespace: monitoring
+      create_namespace: true
+
+  - name: Copy config
+    copy:
+      src: "{{ role_path }}/files/datadog-agent.yml"
+      dest: /tmp/datadog-agent.yml
+
+  - name: Apply config
+    k8s:
+      src: /tmp/datadog-agent.yml
+      state: present
+      apply: true
