@@ -1,4 +1,4 @@
 ---
 - name: DataDog
   include_tasks: datadog.yml
-  when: dd_api_key is defined
+

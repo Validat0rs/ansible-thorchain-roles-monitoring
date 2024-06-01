@@ -29,4 +29,5 @@
       mode: "0644"
 
   - name: Apply config
-    command: kubectl apply -f /tmp/datadog-agent.yml
+    shell: kubectl apply -f /tmp/datadog-agent.yml
+  when: dd_api_key is defined
