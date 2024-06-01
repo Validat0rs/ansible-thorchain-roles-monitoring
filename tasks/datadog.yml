@@ -29,7 +29,4 @@
       mode: "0644"
 
   - name: Apply config
-    k8s:
-      src: /tmp/datadog-agent.yml
-      state: present
-      apply: true
+    command: kubectl apply -f /tmp/datadog-agent.yml
