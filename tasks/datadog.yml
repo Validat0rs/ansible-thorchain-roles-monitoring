@@ -21,9 +21,12 @@
       create_namespace: true
 
   - name: Copy config
-    copy:
-      src: "{{ role_path }}/files/datadog-agent.yml"
-      dest: /tmp/datadog-agent.yml
+    template:
+      src: datadog-agent.yml.j2
+      dest: /tmp
+      owner: root
+      group: root
+      mode: "0644"
 
   - name: Apply config
     k8s:

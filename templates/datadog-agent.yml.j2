@@ -4,6 +4,7 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: {{ cluster_name }}
     credentials:
       apiSecret:
         secretName: datadog-secret
