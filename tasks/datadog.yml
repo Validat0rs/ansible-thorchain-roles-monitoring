@@ -20,7 +20,7 @@
   - name: Copy config
     template:
       src: datadog-agent.yml.j2
-      dest: /tmp
+      dest: /tmp/datadog-agent.yml
       owner: root
       group: root
       mode: "0644"
