@@ -8,11 +8,11 @@
 
   - name: Create namespace
     shell: |
-      kubectl create namespace datadog
+      kubectl create namespace datadog-system
 
   - name: Add API key
     shell: |
-      kubectl create secret generic datadog-secret --from-literal api-key={{ dd_api_key }} -n datadog
+      kubectl create secret generic datadog-secret --from-literal api-key={{ dd_api_key }} -n datadog-system
 
   - name: Install datadog/datadog-operator
     shell: |

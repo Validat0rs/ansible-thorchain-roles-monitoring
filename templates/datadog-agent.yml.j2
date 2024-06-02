@@ -4,7 +4,13 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: {{ dd_cluster_name }}
+    site: datadoghq.com
     credentials:
       apiSecret:
         secretName: datadog-secret
         keyName: api-key
+
+  features:
+    liveProcessCollection:
+      enabled: true
