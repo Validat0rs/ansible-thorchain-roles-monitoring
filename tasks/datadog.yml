@@ -6,20 +6,13 @@
       name: datadog
       repo_url: https://helm.datadoghq.com
 
-  - name: Create namespace
-    shell: |
-      kubectl create namespace monitoring
-
   - name: Add API key
     shell: |
-      kubectl create secret generic datadog-secret --from-literal api-key={{ dd_api_key }} --namespace=monitoring
+      kubectl create secret generic datadog-secret --from-literal api-key={{ dd_api_key }}
 
   - name: Install datadog/datadog-operator
-    kubernetes.core.helm:
-      name: datadog-operator
-      chart_ref: datadog/datadog-operator
-      release_namespace: monitoring
-      create_namespace: true
+    shell: |
+      helm install datadog-operator datadog/datadog-operator
 
   - name: Copy config
     template:
