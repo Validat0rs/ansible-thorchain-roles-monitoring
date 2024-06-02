@@ -16,7 +16,7 @@
 
   - name: Install datadog/datadog-operator
     shell: |
-      helm install datadog-operator datadog/datadog-operator -n datadog
+      helm install datadog-operator datadog/datadog-operator -n datadog-system
 
   - name: Copy config
     template:
@@ -28,5 +28,6 @@
 
   - name: Apply config
     shell: |
-      kubectl apply -f /tmp/datadog-agent.yml -n datadog
+      kubectl apply -f /tmp/datadog-agent.yml -n datadog-system
+
   when: dd_api_key is defined
