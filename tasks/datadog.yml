@@ -6,13 +6,17 @@
       name: datadog
       repo_url: https://helm.datadoghq.com
 
+  - name: Create namespace
+    shell: |
+      kubectl create namespace datadog
+
   - name: Add API key
     shell: |
-      kubectl create secret generic datadog-secret --from-literal api-key={{ dd_api_key }}
+      kubectl create secret generic datadog-secret --from-literal api-key={{ dd_api_key }} -n datadog
 
   - name: Install datadog/datadog-operator
     shell: |
-      helm install datadog-operator datadog/datadog-operator
+      helm install datadog-operator datadog/datadog-operator -n datadog
 
   - name: Copy config
     template:
@@ -24,5 +28,5 @@
 
   - name: Apply config
     shell: |
-      kubectl apply -f /tmp/datadog-agent.yml
+      kubectl apply -f /tmp/datadog-agent.yml -n datadog
   when: dd_api_key is defined
