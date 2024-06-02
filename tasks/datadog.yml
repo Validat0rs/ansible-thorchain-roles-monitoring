@@ -8,7 +8,7 @@
 
   - name: Add API key
     shell: |
-      kubectl create secret generic datadog-secret --from-literal api-key={{ api_key }} --namespace=monitoring
+      kubectl create secret generic datadog-secret --from-literal api-key={{ dd_api_key }} --namespace=monitoring
 
   - name: Install datadog/datadog-operator
     kubernetes.core.helm:
